@@ -13,9 +13,10 @@ return new class extends Migration
     {
         Schema::create('page_faq', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('page_id')->constrained('pages')->onDelete('cascade');
-            $table->foreignId('faq_id')->constrained('faqs')->onDelete('cascade');
-            $table->timestamps();
+            $table->unsignedBigInteger('page_id');
+            $table->unsignedBigInteger('faq_id');
+            $table->foreign('page_id')->references('id')->on('pages')->onDelete('cascade');
+            $table->foreign('faq_id')->references('id')->on('faqs')->onDelete('cascade');
         });
     }
 

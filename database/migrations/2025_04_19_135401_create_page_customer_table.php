@@ -13,9 +13,10 @@ return new class extends Migration
     {
         Schema::create('page_customer', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('page_id')->constrained('pages')->onDelete('cascade');
-            $table->foreignId('customer_id')->constrained('customers')->onDelete('cascade');
-            $table->timestamps();
+            $table->unsignedBigInteger('page_id');
+            $table->unsignedBigInteger('customer_id');
+            $table->foreign('page_id')->references('id')->on('pages')->onDelete('cascade');
+            $table->foreign('customer_id')->references('id')->on('customers')->onDelete('cascade');
         });
     }
 

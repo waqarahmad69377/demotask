@@ -15,26 +15,23 @@ class Page extends Model
         'meta_keywords',
         'writer_title',
         'writer_content',
-        'writer_name',
         'faq_title',
         'faq_content',
-        'faq_name',
         'customer_title',
         'customer_content',
-        'customer_name',
         'status'
     ];
 
     public function writers()
     {
-        return $this->hasMany(Writer::class, 'page_id');
+        return $this->belongsToMany(Writer::class, 'page_writer', 'page_id', 'writer_id');
     }
     public function faqs()
     {
-        return $this->hasMany(Faqs::class, 'page_id');
+        return $this->belongsToMany(Faqs::class, 'page_faq', 'page_id', 'faq_id');
     }
     public function customers()
     {
-        return $this->hasMany(Customer::class, 'page_id');
+        return $this->belongsToMany(Customer::class, 'page_customer', 'page_id', 'customer_id');
     }
 }

@@ -23,15 +23,18 @@ return new class extends Migration
 
             $table->string('writer_title')->nullable(true);
             $table->string('writer_content')->nullable(true);
-            $table->string('writer_name')->nullable(true);
+            // $table->string('writer_name')->nullable(true);
 
             $table->string('faq_title')->nullable(true);
             $table->string('faq_content')->nullable(true);
-            $table->string('faq_name')->nullable(true);
+            // $table->string('faq_name')->nullable(true);
 
             $table->string('customer_title')->nullable(true);
             $table->string('customer_content')->nullable(true);
-            $table->string('customer_name')->nullable(true);
+            // $table->string('customer_name')->nullable(true);
+
+            $table->string('page_image')->nullable(true);
+            $table->string('page_image_alt')->nullable(true);
 
             $table->string('status')->default('active');
 

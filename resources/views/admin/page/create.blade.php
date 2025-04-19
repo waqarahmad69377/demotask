@@ -16,6 +16,7 @@
         <form action="{{ route('page.store') }}" method="POST" enctype="multipart/form-data" class="flex flex-col gap-6">
             @csrf
             @method('POST')
+            {{-- General information --}}
             <div class="card rounded-xl border-2 border-gray-300 shadow-md w-full">
                 <header class="card-header">
                     <p class="card-header-title">
@@ -24,7 +25,7 @@
                     </p>
                 </header>
                 <div class="card-content ">
-                    <div class="field">
+                    <div class="field relative">
                         <label class="label" for="title">Title <span class="text-red-500 text-xs">*</span></label>
                         <div class="control">
                             <input type="text" name="title" id="title" class="input" value="{{old('title')}}" autofocus>
@@ -32,8 +33,11 @@
                         <p class="help">
                             Enter a title for the page. This is what will appear in search engine results
                         </p>
+                        @if($errors->has('title'))
+                            <p class="help text-red-500 absolute right-0 bottom-0">{{ $errors->first('title') }}</p>
+                        @endif
                     </div>
-                    <div class="field">
+                    <div class="field relative">
                         <label class="label" for="titleSlug">Slug <span class="text-red-500 text-xs">*</span></label>
                         <div class="control">
                             <input type="text" name="title_slug" id="titleSlug" class="input" value="{{old('title_slug')}}" />
@@ -41,9 +45,13 @@
                         <p class="help">
                             Enter a slug for the page. This is what will appear in search engine results
                         </p>
+                        @if($errors->has('title_slug'))
+                            <p class="help text-red-500 absolute right-0 bottom-0">{{ $errors->first('title_slug') }}</p>
+                        @endif
                     </div>
                 </div>
             </div>
+            {{-- SEO information --}}
             <div class="card rounded-xl border-2 border-gray-300 shadow-md w-full">
                 <header class="card-header">
                     <p class="card-header-title">
@@ -53,7 +61,7 @@
                 </header>
                 <div class="card-content ">
                     <div class="field">
-                        <label class="label" for="metaTitle">Meta Title</label>
+                        <label class="label" for="metaTitle">Meta Title (Optional)</label>
                         <div class="control">
                             <input type="text" name="meta_title" id="metaTitle" class="input" value="{{old('meta_title')}}" autofocus>
                         </div>
@@ -62,16 +70,16 @@
                         </p>
                     </div>
                     <div class="field">
-                        <label class="label" for="metaDesc">Meta Description</label>
+                        <label class="label" for="metaDesc">Meta Description (Optional)</label>
                         <div class="control">
-                            <textarea name="meta_description" id="metaDesc" value="{{old('meta_description')}}" class="textarea"></textarea>
+                            <textarea name="meta_description" id="metaDesc" class="textarea">{{old('meta_description')}}</textarea>
                         </div>
                         <p class="help">
                             Provide a brief description of the page. This is what will appear in search engine results
                         </p>
                     </div>
                     <div class="field">
-                        <label class="label" for="metaKeywords">Meta Keywords</label>
+                        <label class="label" for="metaKeywords">Meta Keywords (Optional)</label>
                         <div class="control">
                             <input type="text" name="meta_keywords" id="metaKeywords" value="{{old('meta_keywords')}}" class="input">
                         </div>
@@ -81,6 +89,7 @@
                     </div>
                 </div>
             </div>
+            {{-- Writer information --}}
             <div class="card rounded-xl border-2 border-gray-300 shadow-md w-full">
                 <header class="card-header">
                     <p class="card-header-title">
@@ -90,7 +99,7 @@
                 </header>
                 <div class="card-content ">
                     <div class="field">
-                        <label class="label" for="writerTitle">Title</label>
+                        <label class="label" for="writerTitle">Title (Optional)</label>
                         <div class="control">
                             <input type="text" name="writer_title" id="writerTitle" class="input" value="{{old('writer_title')}}" autofocus>
                         </div>
@@ -99,9 +108,9 @@
                         </p>
                     </div>
                     <div class="field">
-                        <label class="label" for="writerContent">Content</label>
+                        <label class="label" for="writerContent">Content (Optional)</label>
                         <div class="control">
-                            <textarea name="writer_content" id="writerContent" value="{{old('writer_content')}}" class="textarea"></textarea>
+                            <textarea name="writer_content" id="writerContent" class="textarea">{{old('writer_content')}}</textarea>
                         </div>
                         <p class="help">
                             Enter content for writer section. This is what will appear in search engine results
@@ -124,6 +133,7 @@
                     </div>
                 </div>
             </div>
+            {{-- Faq's information --}}
             <div class="card rounded-xl border-2 border-gray-300 shadow-md w-full">
                 <header class="card-header">
                     <p class="card-header-title">
@@ -133,7 +143,7 @@
                 </header>
                 <div class="card-content ">
                     <div class="field">
-                        <label class="label" for="faqTitle">Title</label>
+                        <label class="label" for="faqTitle">Title (Optional)</label>
                         <div class="control">
                             <input type="text" name="faqs_title" id="faqsTitle" value="{{old('faqs_title')}}" class="input" autofocus>
                         </div>
@@ -142,22 +152,19 @@
                         </p>
                     </div>
                     <div class="field">
-                        <label class="label" for="faqContent">Content</label>
+                        <label class="label" for="faqContent">Content (Optional)</label>
                         <div class="control">
-                            <textarea name="faq_content" id="faqContent" value="{{old('faq_content')}}" class="textarea"></textarea>
+                            <textarea name="faq_content" id="faqContent" class="textarea">{{old('faq_content')}}</textarea>
                         </div>
                         <p class="help">
                             Enter content for faq section. This is what will appear in search engine results
                         </p>
                     </div>
                     <div class="field">
-                        <label class="label" for="selectFaqs">Select Faqs</label>
+                        <label class="label" for="selectFaqs">Select Faqs (Optional)</label>
                         <div class="control">
                             <div class="select is-multiple">
                                 <select name="faqs[]" id="selectFaqs" multiple>
-                                    {{-- @foreach($writers as $writer)
-                                        <option value="{{ $writer->id }}">{{ $writer->name }}</option>
-                                    @endforeach --}}
                                 </select>
                             </div>
                         </div>
@@ -167,6 +174,7 @@
                     </div>
                 </div>
             </div>
+            {{-- Customer's information --}}
             <div class="card rounded-xl border-2 border-gray-300 shadow-md w-full">
                 <header class="card-header">
                     <p class="card-header-title">
@@ -176,7 +184,7 @@
                 </header>
                 <div class="card-content ">
                     <div class="field">
-                        <label class="label" for="customerTitle">Title</label>
+                        <label class="label" for="customerTitle">Title (Optional)</label>
                         <div class="control">
                             <input type="text" name="customer_title" id="customerTitle" value="{{old('customer_title')}}" class="input" autofocus>
                         </div>
@@ -185,16 +193,16 @@
                         </p>
                     </div>
                     <div class="field">
-                        <label class="label" for="customerContent">Content</label>
+                        <label class="label" for="customerContent">Content (Optional)</label>
                         <div class="control">
-                            <textarea name="customer_content" id="customerContent" value="{{old('customer_content')}}" class="textarea"></textarea>
+                            <textarea name="customer_content" id="customerContent" class="textarea">{{old('customer_content')}}</textarea>
                         </div>
                         <p class="help">
                             Enter content for customer's section. This is what will appear in search engine results
                         </p>
                     </div>
                     <div class="field">
-                        <label class="label" for="selectCustomers">Select Customers</label>
+                        <label class="label" for="selectCustomers">Select Customers (Optional)</label>
                         <div class="control">
                             <div class="select is-multiple">
                                 <select name="customers[]" id="selectCustomers" multiple>
@@ -209,7 +217,70 @@
                         </p>
                     </div>
                 </div>
-            </div>  
+            </div> 
+            {{-- Image information --}}
+            <div class="card rounded-xl border-2 border-gray-300 shadow-md w-full">
+                <header class="card-header">
+                    <p class="card-header-title">
+                        <span class="icon"><i class="mdi mdi-image text-xl"></i></span>
+                        Image Information
+                    </p>
+                </header>
+                <div class="card-content ">
+                    {{-- preview image  --}}
+                    <div class="field">
+                        <label class="label" for="pageImage">Preview Image</label>
+                        <div class="control">
+                            <img id="previewImage" src="#" alt="Preview Image" class="hidden w-32 h-32 rounded-lg object-cover">
+                        </div>
+                        <p class="help">
+                            Preview of the image you will upload
+                        </p>
+                    </div>
+                    <div class="field">
+                        <label class="label" for="pageImage">Feature Image (Optional)</label>
+                        <div class="control">
+                            <input type="file" name="page_image" id="pageImage" value="{{old('page_image')}}" class="input" autofocus>
+                        </div>
+                        <p class="help">
+                            Upload an image for the page. This is what will appear in search engine results
+                        </p>
+                    </div>
+                    <div class="field">
+                        <label class="label" for="pageImageAlt">Feature Image Alt (Optional)</label>
+                        <div class="control">
+                            <input type="text" name="page_image_alt" id="pageImageAlt" value="{{old('page_image_alt')}}" class="input" autofocus>
+                        </div>
+                        <p class="help">
+                            Enter alt text for the image. This is what will appear in search engine results
+                        </p>
+                    </div>
+                </div>
+            </div> 
+            {{-- creating card of page status --}}
+            <div class="card rounded-xl border-2 border-gray-300 shadow-md w-full">
+                <header class="card-header">
+                    <p class="card-header-title">
+                        <span class="icon"><i class="mdi mdi-lock"></i></span>
+                        Page Status
+                    </p>
+                </header>
+                <div class="card-content ">
+                    <div class="field">
+                        <label class="label" for="pageStatus">Page Status</label>
+                        <div class="control">
+                            <select name="page_status" id="pageStatus" class="input">
+                                <option value="active">Active</option>
+                                <option value="inactive">Inactive</option>
+                            </select>
+                        </div>
+                        <p class="help">
+                            Select the status of the page. This is what will appear in search engine results
+                        </p>
+                    </div>
+                </div>
+            </div>
+            {{-- submit button --}}
             <div class="field grouped">
                 <div class="control">
                     <button type="submit" class="button blue">
@@ -231,11 +302,24 @@
 @section('scripts')
     <script>
         $(document).ready(function(){
+            // preview image
+            $('#pageImage').change(function(e){
+                var reader = new FileReader();
+                reader.onload = function(e){
+                    $('#previewImage').attr('src', e.target.result);
+                    $('#previewImage').removeClass('hidden');
+                    $('#previewImage').addClass('block');
+                }
+                reader.readAsDataURL(e.target.files[0]);
+
+            });
             // convert title in slug and slug input writeable 
             $('#titleSlug').attr('readonly', true);
+            $('#titleSlug').attr('placeholder', 'Slug will be generated automatically');
             $('#title').on('focus', function() {
                 $(this).attr('placeholder', 'Title will be generated automatically');
             });
+
             $('#title').on('keyup', function() {
                 var title = $(this).val();
                 var slug = title.toLowerCase().replace(/ /g, '-').replace(/[^\w-]+/g, '');
