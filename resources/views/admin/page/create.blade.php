@@ -15,6 +15,35 @@
     <div class="grid grid-cols-1 gap-6 lg:grid-cols-1 mb-6">
         <form action="{{ route('page.store') }}" method="POST" enctype="multipart/form-data" class="flex flex-col gap-6">
             @csrf
+            @method('POST')
+            <div class="card rounded-xl border-2 border-gray-300 shadow-md w-full">
+                <header class="card-header">
+                    <p class="card-header-title">
+                        <span class="icon"><i class="mdi mdi-lock"></i></span>
+                        General Information
+                    </p>
+                </header>
+                <div class="card-content ">
+                    <div class="field">
+                        <label class="label" for="title">Title <span class="text-red-500 text-xs">*</span></label>
+                        <div class="control">
+                            <input type="text" name="title" id="title" class="input" value="{{old('title')}}" autofocus>
+                        </div>
+                        <p class="help">
+                            Enter a title for the page. This is what will appear in search engine results
+                        </p>
+                    </div>
+                    <div class="field">
+                        <label class="label" for="titleSlug">Slug <span class="text-red-500 text-xs">*</span></label>
+                        <div class="control">
+                            <input type="text" name="title_slug" id="titleSlug" class="input" value="{{old('title_slug')}}" />
+                        </div>
+                        <p class="help">
+                            Enter a slug for the page. This is what will appear in search engine results
+                        </p>
+                    </div>
+                </div>
+            </div>
             <div class="card rounded-xl border-2 border-gray-300 shadow-md w-full">
                 <header class="card-header">
                     <p class="card-header-title">
@@ -202,6 +231,17 @@
 @section('scripts')
     <script>
         $(document).ready(function(){
+            // convert title in slug and slug input writeable 
+            $('#titleSlug').attr('readonly', true);
+            $('#title').on('focus', function() {
+                $(this).attr('placeholder', 'Title will be generated automatically');
+            });
+            $('#title').on('keyup', function() {
+                var title = $(this).val();
+                var slug = title.toLowerCase().replace(/ /g, '-').replace(/[^\w-]+/g, '');
+                $('#titleSlug').val(slug);
+            });
+            
             $('#selectWriters').select2({
                 placeholder: 'Select Writers',
                 allowClear: true,

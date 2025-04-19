@@ -20,24 +20,30 @@
                     @csrf
                     @method('POST')
                     {{-- Customer Number --}}
-                    <div class="field">
-                        <label class="label" for="custPhone">Customer Number <span class="text-red-500 text-xs">*</span></label>
+                    <div class="field relative">
+                        <label class="label" for="custNo">Customer No <span class="text-red-500 text-xs">*</span></label>
                         <div class="control">
-                            <input type="text" name="cust_phone" id="custPhone" value="{{old('cust_phone')}}" class="input" pattern="[a-zA-Z]{2}-[0-9]{6}" autofocus />
+                            <input type="text" name="cust_no" id="custNo" value="{{old('cust_no')}}" class="input" pattern="[a-zA-Z]{2}-[0-9]{6}" autofocus />
                         </div>
                         <p class="help">
                             Enter a unqiue customer number in the format XX-123456. The first two characters should be letters and the last six should be numbers.
                             <br>Example: AB-123456
                         </p>
+                        @if($errors->has('cust_no'))
+                            <p class="text-red-500 text-xs italic absolute right-0 bottom-0">{{$errors->first('cust_no')}}</p>
+                        @endif
                     </div>
 
                     {{-- Name field --}}
-                    <div class="field">
+                    <div class="field relative">
                         <label class="label" for="custName">Name <span class="text-red-500 text-xs">*</span></label>
                         <div class="control">
                             <input type="text" name="cust_name" id="custName" value="{{old('cust_name')}}" class="input" />
                         </div>
                         <p class="help">Enter the customer's full name.</p>
+                        @if($errors->has('cust_name'))
+                            <p class="text-red-500 text-xs italic absolute right-0 bottom-0">{{$errors->first('cust_name')}}</p>
+                        @endif
                     </div>
 
                     {{-- Review field --}}

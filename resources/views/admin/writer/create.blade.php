@@ -19,7 +19,7 @@
             <div class="card rounded-xl border-2 border-gray-300 shadow-md w-full">
                 <div class="card-content ">
                     {{-- Writer Name Field--}}
-                    <div class="field">
+                    <div class="field relative">
                         <label class="label" for="writerName">Name <span class="text-red-500 text-xs">*</span></label>
                         <div class="control">
                             <input type="text" name="writer_name" id="writerName" class="input" value="{{old('writer_name')}}" autofocus>
@@ -27,6 +27,9 @@
                         <p class="help">
                             The Full name of the writer. This will be displayed on the page.
                         </p>
+                        @if($errors->has('writer_name'))
+                            <p class="text-red-500 text-xs italic absolute right-0 bottom-0">{{$errors->first('writer_name')}}</p>
+                        @endif
                     </div>
                     {{-- Writer Slug Field --}}
                     <div class="field">
@@ -39,14 +42,18 @@
                         </p>
                     </div>
                     {{-- Writer Field--}}
-                    <div class="field">
+                    <div class="field relative">
                         <label class="label" for="writerNo">Writer No <span class="text-red-500 text-xs">*</span></label>
                         <div class="control">
-                            <input type="text" name="writer_no" id="writerNo" value="{{old('writer_no')}}" class="input" />
+                            <input type="text" name="writer_no" id="writerNo" value="{{old('writer_no')}}" class="input" pattern="[a-zA-Z]{3}-[0-9]{6}" />
                         </div>
                         <p class="help">
-                            A unique number assigned to the writer. This can be used for identification purposes.
+                            A unique number assigned to the writer. This can be used for identification purposes. writer no should be in the format of XXX-123456.
+                            <br>Example: ABC-123456
                         </p>
+                        @if($errors->has('writer_no'))
+                            <p class="text-red-500 text-xs italic absolute right-0 bottom-0">{{$errors->first('writer_no')}}</p>
+                        @endif
                     </div>
                     {{-- About Field--}}
                     <div class="field">
@@ -241,6 +248,27 @@
         </form>
     </div>
 </section>
+
+
+@endsection
+
+@section('scripts')
+    <script>
+        // slug input make it readonly
+        $(document).ready(function() {
+            $('#writerSlug').attr('readonly', true);
+        });
+        // end slug input make it readonly
+        $(document).ready(function() {
+            $('#writerName').on('input', function() {
+                var title = $(this).val();
+                var slug = title.toLowerCase().replace(/[^a-z0-9]+/g, '-');
+                $('#writerSlug').val(slug);
+            });
+        });
+        // end convert title in slug and slug input writeable in jquery
+
+    </script>
 
 
 @endsection

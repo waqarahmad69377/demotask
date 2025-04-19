@@ -11,6 +11,17 @@
     </div>
 </section>
 
+@if(Session::has('success'))
+<div class="notification green">
+    <div class="flex flex-col md:flex-row items-center justify-between space-y-3 md:space-y-0">
+      <div>
+        <span class="icon"><i class="mdi mdi-buffer"></i></span>
+        <b> {{ Session::get('success') }}</b>
+      </div>
+      <button type="button" class="button small textual --jb-notification-dismiss">Dismiss</button>
+    </div>
+  </div>
+@endif
 
 <section class="section main-section">
 
@@ -20,23 +31,39 @@
                 <table class="table is-striped is-hoverable is-fullwidth w-full">
                     <thead>
                         <tr>
-                            <th>Name</th>
-                            <th>Email</th>
-                            <th>Phone</th>
+                            <th>Sr no</th>
+                            <th>Customer Image</th>
+                            <th>Customer Name</th>
+                            <th>Custsomer No</th>
+                            <th>Customer Rating</th>
                             <th>Actions</th>
                         </tr>
                     </thead>
                     <tbody>
-                        {{-- @foreach($customers as $customer)
+                        @foreach($customers as $customer)
                         <tr>
-                            <td>{{ $customer->name }}</td>
-                            <td>{{ $customer->email }}</td>
-                            <td>{{ $customer->phone }}</td>
-                            <td><a href="{{ route('admin.customer.edit', $customer->id) }}" class="button is-small">Edit</a></td>
+                            <td>{{$customer->id}}</td>
+                            <td>
+                                <img src="{{ asset('storage/'.$customer->image) }}" alt="Customer Image" class="w-16 h-16 rounded-full">
+                            </td>
+                            <td class="capitalize">{{ $customer->name }}</td>
+                            <td>{{ $customer->cust_no }}</td>
+                            <td>
+                                {{-- rating with stars --}}
+                                @for($i = 0; $i < $customer->rating; $i++)
+                                    <span class="icon"><i class="mdi mdi-star"></i></span>
+                                @endfor
+                                @for($i = $customer->rating; $i < 5; $i++)
+                                    <span class="icon"><i class="mdi mdi-star-outline"></i></span>
+                                @endfor
+                                {{-- {{$customer->rating}} --}}
+                            </td>
+                            <td><a href="{{ route('customer.edit', $customer->id) }}" class="button is-small">Edit</a> <form action="{{route('customer.destroy', $customer->id)}}" method="POST" class="inline-block">@csrf @method('delete')<button type="submit" class="button red">Delete</button></form></td>
                         </tr>
-                        @endforeach --}}
+                        @endforeach
                     </tbody>
                 </table>
+                {{ $customers->links() }}
             </div>
         </div>
     </div>

@@ -13,6 +13,15 @@ return new class extends Migration
     {
         Schema::create('customers', function (Blueprint $table) {
             $table->id();
+            $table->string('cust_no')->unique();
+            $table->string('name');
+            $table->string('review')->nullable(true);
+            $table->string('comment')->nullable(true);
+            $table->string('about')->nullable(true);
+            $table->string('rating')->nullable(true);
+            $table->string('no_of_reviews')->nullable(true);
+            $table->string('date')->nullable(true);
+            $table->string('image')->nullable(true);
             $table->timestamps();
         });
     }
