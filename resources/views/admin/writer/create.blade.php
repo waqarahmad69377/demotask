@@ -112,7 +112,7 @@
                     <div class="field">
                         <label class="label" for="writerRat">Rating</label>
                         <div class="control">
-                            <input type="text" name="writer_rat" id="writerRat" value="{{old('writer_rat')}}" class="input" />
+                            <input type="number" name="writer_rat" id="writerRat" value="{{old('writer_rat')}}" class="input" />
                         </div>
                         <p class="help">
                             The rating of the writer. This will be displayed on the page.

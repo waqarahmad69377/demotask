@@ -22,20 +22,26 @@
             <div class="card-content w-full">
                 <form action="{{ route('faq.store') }}" method="POST" enctype="multipart/form-data">
                     @csrf
-                    <div class="field">
+                    <div class="field relative">
                         <label class="label" for="faqQues">Question <span class="text-red-500 text-xs">*</span></label>
                         <div class="control">
-                            <input type="text" name="faq_ques"  id="faqQues" value="{{old('faq_ques')}}" class="input" placeholder="Enter question" required>
+                            <input type="text" name="faq_ques"  id="faqQues" value="{{old('faq_ques')}}" class="input" placeholder="Enter question" >
                         </div>
                         <p class="help">Enter the question for the FAQ.</p>
+                        @if($errors->has('faq_ques'))
+                            <p class="help text-red-500 absolute right-0 bottom-0">{{ $errors->first('faq_ques') }}</p>
+                        @endif
                     </div>
 
                     <div class="field">
                         <label class="label" for="faqAns">Answer <span class="text-red-500 text-xs">*</span></label>
                         <div class="control">
-                            <textarea name="faq_ans" id="faqAns"  class="textarea" placeholder="Enter answer" required></textarea>
+                            <textarea name="faq_ans" id="faqAns"  class="textarea" placeholder="Enter answer">{{old('faq_ans')}}</textarea>
                         </div>
                         <p class="help"></p>
+                        @if($errors->has('faq_ans'))
+                            <p class="help text-red-500 absolute right-0 bottom-0">{{ $errors->first('faq_ans') }}</p>
+                        @endif
                     </div>
 
                     <div class="field is-grouped is-grouped-right">

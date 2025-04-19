@@ -35,20 +35,39 @@
                             <th>Writer Slug</th>
                             <th>Writer No</th>
                             <th>Writer Rating</th>
+                            <th>Status</th>
                             <th>Actions</th>
                         </tr>
                     </thead>
                     <tbody>
                         @foreach($writers as $writer)
                         <tr>
-                            <td>{{$writer->id}}</td>
                             <td>
-                                <img src="{{ asset('storage/'.$writer->image) }}" alt="Writer Image" class="w-16 h-16 rounded-full">
+                                {{$writer->id}}
+                            </td>
+                            <td>
+                                <img src="{{ asset('storage/'.$writer->image) }}" alt="Writer Image" class="w-16 h-16 rounded-full object-cover">
                             </td>
                             <td class="capitalize">{{ $writer->name }}</td>
+                            <td>{{$writer->slug}}</td>
                             <td>{{ $writer->writer_no }}</td>
                             <td>
-                                <a href="{{ route('writer.show', $writer->id) }}" class="button small light">View</a>
+                                @for($i = 0; $i < $writer->rating; $i++)
+                                    <span class="icon"><i class="mdi mdi-star text-yellow-500"></i></span>
+                                @endfor
+                                @for($i = $writer->rating; $i < 5; $i++)
+                                    <span class="icon"><i class="mdi mdi-star-outline"></i></span>
+                                @endfor
+                            </td>
+                            <td>
+                                @if($writer->status == 'active')
+                                    <span class="tag green inline-block">Active</span>
+                                @else
+                                    <span class="tag red inline-block">Inactive</span>
+                                @endif
+                            </td>
+                            
+                            <td>
                                 <a href="{{ route('writer.edit', $writer->id) }}" class="button small light">Edit</a>
                                 <form action="{{ route('writer.destroy', $writer->id) }}" method="POST" class="inline">
                                     @csrf

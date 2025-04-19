@@ -17,7 +17,14 @@ class CustomerController extends Controller
         $customers = Customer::paginate(10);
         return view('admin.customer.index')->with('customers', $customers);
     }
-
+    /**
+     * Display a listing of customers in page select2
+     */
+    public function customersSelect()
+    {
+        $customers = Customer::select('id', 'name')->get();
+        return response()->json($customers);
+    }
     /**
      * Show the form for creating a new resource.
      */

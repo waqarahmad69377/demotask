@@ -51,14 +51,14 @@
                             <td>
                                 {{-- rating with stars --}}
                                 @for($i = 0; $i < $customer->rating; $i++)
-                                    <span class="icon"><i class="mdi mdi-star"></i></span>
+                                    <span class="icon"><i class="mdi mdi-star text-yellow-500"></i></span>
                                 @endfor
                                 @for($i = $customer->rating; $i < 5; $i++)
                                     <span class="icon"><i class="mdi mdi-star-outline"></i></span>
                                 @endfor
                                 {{-- {{$customer->rating}} --}}
                             </td>
-                            <td><a href="{{ route('customer.edit', $customer->id) }}" class="button is-small">Edit</a> <form action="{{route('customer.destroy', $customer->id)}}" method="POST" class="inline-block">@csrf @method('delete')<button type="submit" class="button red">Delete</button></form></td>
+                            <td><a href="{{ route('customer.edit', $customer->id) }}" class="button small is-small">Edit</a> <form action="{{route('customer.destroy', $customer->id)}}" method="POST" class="inline-block">@csrf @method('delete')<button type="submit" class="button small red">Delete</button></form></td>
                         </tr>
                         @endforeach
                     </tbody>

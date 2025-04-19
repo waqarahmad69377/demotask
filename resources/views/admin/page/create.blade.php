@@ -246,7 +246,7 @@
                 placeholder: 'Select Writers',
                 allowClear: true,
                 ajax: {
-                    url: '',
+                    url: '{{ route('writers.select') }}',
                     dataType: 'json',
                     delay: 250,
                     processResults: function (data) {
@@ -267,7 +267,7 @@
                 placeholder: 'Select Faqs',
                 allowClear: true,
                 ajax: {
-                    url: '',
+                    url: '{{ route('faqs.select') }}',
                     dataType: 'json',
                     delay: 250,
                     processResults: function (data) {
@@ -275,7 +275,7 @@
                             results: $.map(data, function (item) {
                                 return {
                                     id: item.id,
-                                    text: item.name
+                                    text: item.question
                                 }
                             })
                         };
@@ -288,7 +288,7 @@
                 placeholder: 'Select Customers',
                 allowClear: true,
                 ajax: {
-                    url: '',
+                    url: '{{ route('customers.select') }}',
                     dataType: 'json',
                     delay: 250,
                     processResults: function (data) {

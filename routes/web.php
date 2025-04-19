@@ -54,4 +54,8 @@ Route::middleware('auth')->group(function () {
     Route::resource('writer', \App\Http\Controllers\admin\WriterController::class);
     // profile route
     Route::get('/profile', [\App\Http\Controllers\admin\ProfileController::class, 'index'])->name('profile');
+
+    Route::get('/write-select', [\App\Http\Controllers\admin\WriterController::class, 'writersSelect'])->name('writers.select');
+    Route::get('/faq-select', [\App\Http\Controllers\admin\FaqController::class, 'faqsSelect'])->name('faqs.select');
+    Route::get('/customer-select', [\App\Http\Controllers\admin\CustomerController::class, 'customersSelect'])->name('customers.select');
 });
