@@ -121,9 +121,6 @@
                         <div class="control">
                             <div class="select is-multiple">
                                 <select name="writers[]" id="selectWriters" multiple>
-                                    {{-- @foreach($writers as $writer)
-                                        <option value="{{ $writer->id }}">{{ $writer->name }}</option>
-                                    @endforeach --}}
                                 </select>
                             </div>
                         </div>
