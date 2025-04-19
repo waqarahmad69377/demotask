@@ -40,12 +40,12 @@
             <span class="menu-item-label">FAQ's</span>
           </a>
         </li>
-        <li>
+        {{-- <li>
             <a href="{{route('profile')}}">
               <span class="icon"><i class="mdi mdi-account-circle"></i></span>
               <span class="menu-item-label">Profile</span>
             </a>
-          </li>
+          </li> --}}
         {{-- <li>
           <a class="dropdown">
             <span class="icon"><i class="mdi mdi-view-list"></i></span>
